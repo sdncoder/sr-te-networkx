@@ -5,9 +5,9 @@ from networkx.algorithms.flow import shortest_augmenting_path
 GA = nx.Graph()
 
 GA.add_edge('ja', 'da', weight=10)
-GA.add_edge('ja', 'ta', weight=101)
+GA.add_edge('ja', 'ta', weight=10)
 GA.add_edge('la', 'da', weight=10)
-GA.add_edge('la', 'ta', weight=101)
+GA.add_edge('la', 'ta', weight=10)
 GA.add_edge('la', 'ha', weight=10)
 GA.add_edge('ha', 'aa', weight=10)
 GA.add_edge('aa', 'ga', weight=10)
@@ -37,9 +37,12 @@ nx.draw_networkx_edges(GA, posA, edgelist=elarge, width=4, alpha=0.5,
 
 # labels
 nx.draw_networkx_labels(GA, posA, font_size=9, font_family='sans-serif')
-paths = list(nx.shortest_path(GA, 'ja', 'da'))
+
+# dijkstra shortest weighted path between two nodes
+pathsA = list(nx.dijkstra_path(GA, 'ja', 'ra'))
+
 #flow = shortest_augmenting_path(G, 'j', 'r', capacity = 5)
-print(paths)
+print(pathsA)
 #print(flow)
 plt.axis('off')
 #plt.show()
@@ -48,7 +51,7 @@ plt.axis('off')
 
 GB = nx.Graph()
 
-GB.add_edge('jb', 'db', weight=10)
+GB.add_edge('jb', 'db', weight=200)
 GB.add_edge('jb', 'tb', weight=10)
 GB.add_edge('lb', 'db', weight=10)
 GB.add_edge('lb', 'tb', weight=10)
@@ -58,10 +61,10 @@ GB.add_edge('ab', 'gb', weight=10)
 GB.add_edge('ab', 'tb', weight=10)
 GB.add_edge('tb', 'db', weight=10)
 GB.add_edge('ab', 'cb', weight=10)
-GB.add_edge('db', 'cb', weight=101)
-GB.add_edge('cb', 'gb', weight=101)
-GB.add_edge('gb', 'hb', weight=101)
-GB.add_edge('rb', 'cb', weight=10)
+GB.add_edge('db', 'cb', weight=200)
+GB.add_edge('cb', 'gb', weight=10)
+GB.add_edge('gb', 'hb', weight=10)
+GB.add_edge('rb', 'cb', weight=200)
 GB.add_edge('rb', 'gb', weight=10)
 
 elarge = [(u, v) for (u, v, d) in GB.edges(data=True) if d['weight'] > 100]
@@ -81,9 +84,12 @@ nx.draw_networkx_edges(GB, posB, edgelist=elarge, width=4, alpha=0.5,
 
 # labels
 nx.draw_networkx_labels(GB, posB, font_size=9, font_family='sans-serif')
-paths = list(nx.shortest_path(GB, 'jb', 'db'))
+
+# dijkstra shortest weighted path between two nodes
+pathsB = list(nx.dijkstra_path(GB, 'jb', 'rb', weight='weight'))
+
 #flow = shortest_augmenting_path(G, 'j', 'r', capacity = 5)
-print(paths)
+print(pathsB)
 #print(flow)
 plt.axis('off')
 plt.show()
