@@ -5,4 +5,4 @@ SR-TE to mitigate SRLG by making primary paths diverse
 
 If A is primary then B is secondary
 
-VRF based coloring for traffic type
+With VRF based coloring for traffic type
