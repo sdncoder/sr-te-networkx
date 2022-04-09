@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import networkx as nx
 from networkx.algorithms.flow import shortest_augmenting_path
 
+# data plane A
 GA = nx.Graph()
 
 GA.add_edge('ja', 'da', weight=10)
@@ -48,6 +49,8 @@ plt.axis('off')
 #plt.show()
 
 #=================================================
+
+# data plane B
 
 GB = nx.Graph()
 
