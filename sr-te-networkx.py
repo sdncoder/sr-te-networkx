@@ -40,10 +40,12 @@ nx.draw_networkx_edges(GA, posA, edgelist=elarge, width=4, alpha=0.5,
 nx.draw_networkx_labels(GA, posA, font_size=9, font_family='sans-serif')
 
 # dijkstra shortest weighted path between two nodes
-pathsA = list(nx.dijkstra_path(GA, 'ja', 'ra'))
-
+pathsA = nx.shortest_path(GA, 'ja', 'ra', weight='weight')
+pathsA_edges = list(zip(pathsA,pathsA[1:]))
+nx.draw_networkx_edges(GA, posA, edgelist=pathsA_edges, width=2, alpha=0.5, edge_color='black',
+        style='solid')
 #flow = shortest_augmenting_path(G, 'j', 'r', capacity = 5)
-print(pathsA)
+print("A_plane_SPF: ", pathsA)
 #print(flow)
 plt.axis('off')
 #plt.show()
@@ -92,7 +94,7 @@ nx.draw_networkx_labels(GB, posB, font_size=9, font_family='sans-serif')
 pathsB = list(nx.dijkstra_path(GB, 'jb', 'rb', weight='weight'))
 
 #flow = shortest_augmenting_path(G, 'j', 'r', capacity = 5)
-print(pathsB)
+print("B_plane_SPF: ", pathsB)
 #print(flow)
 plt.axis('off')
 plt.show()
