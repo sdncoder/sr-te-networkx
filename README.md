@@ -6,3 +6,6 @@ SR-TE to mitigate SRLG by making primary paths diverse
 If A is primary then B is secondary
 ----------------------------------------
 With VRF based coloring for traffic type
+
+
+> Dijkstra coloring of path
