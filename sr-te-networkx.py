@@ -2,9 +2,12 @@ import matplotlib.pyplot as plt
 import networkx as nx
 from networkx.algorithms.flow import shortest_augmenting_path
 
+
+
 # data plane A
 GA = nx.Graph()
 
+#
 GA.add_edge('ja', 'da', weight=10)
 GA.add_edge('ja', 'ta', weight=200)
 GA.add_edge('la', 'da', weight=10)
@@ -40,13 +43,16 @@ nx.draw_networkx_edges(GA, posA, edgelist=elarge, width=4, alpha=0.5,
 nx.draw_networkx_labels(GA, posA, font_size=9, font_family='sans-serif')
 
 # dijkstra shortest weighted path between two nodes
-pathsA = nx.shortest_path(GA, 'ja', 'ra', weight='weight')
-pathsA_edges = list(zip(pathsA,pathsA[1:]))
-nx.draw_networkx_edges(GA, posA, edgelist=pathsA_edges, width=3, alpha=0.5, edge_color='black', style='solid')
-#flow = shortest_augmenting_path(G, 'j', 'r', capacity = 5)
-print("A_plane_SPF: ", pathsA)
+#pathsA = nx.shortest_path(GA, 'ja', 'ra', weight='weight')
+#pathsA_edges = list(zip(pathsA,pathsA[1:]))
+#nx.draw_networkx_edges(GA, posA, edgelist=pathsA_edges, width=3, alpha=0.5, edge_color='black', style='solid')
+
+# flow
+# future development to add capacity per prefix via flow
+
+#print("A_plane_SPF: ", pathsA)
 #print(flow)
-plt.axis('off')
+#plt.axis('off')
 #plt.show()
 
 #=================================================
@@ -93,12 +99,30 @@ nx.draw_networkx_labels(GB, posB, font_size=9, font_family='sans-serif')
 # pathsB = list(nx.dijkstra_path(GB, 'jb', 'rb', weight='weight'))
 
 # dijkstra shortest weighted path between two nodes
-pathsB = nx.shortest_path(GB, 'jb', 'rb', weight='weight')
-pathsB_edges = list(zip(pathsB,pathsB[1:]))
-nx.draw_networkx_edges(GB, posB, edgelist=pathsB_edges, width=3, alpha=0.5, edge_color='black', style='solid')
+#pathsB = nx.shortest_path(GB, 'jb', 'rb', weight='weight')
+#pathsB_edges = list(zip(pathsB,pathsB[1:]))
+#nx.draw_networkx_edges(GB, posB, edgelist=pathsB_edges, width=3, alpha=0.5, edge_color='black', style='solid')
 
 #flow = shortest_augmenting_path(G, 'j', 'r', capacity = 5)
-print("B_plane_SPF: ", pathsB)
+#print("B_plane_SPF: ", pathsB)
 #print(flow)
-plt.axis('off')
+#plt.axis('off')
+print('preplot')
+#plt.ion()
+
+
+#plt.show()
+#plt.pause(2)
+
+
+
+#user input of A-Z SPF calulation
+print('enter A plane source node: ')
+s = input()
+print('enter A destination node: ')
+d = input()
+# dijkstra shortest weighted path between two nodes
+pathsA = nx.shortest_path(GA, s, d, weight='weight')
+pathsA_edges = list(zip(pathsA,pathsA[1:]))
+nx.draw_networkx_edges(GA, posA, edgelist=pathsA_edges, width=3, alpha=0.5, edge_color='black', style='solid')
 plt.show()
