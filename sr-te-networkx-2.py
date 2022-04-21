@@ -30,6 +30,7 @@ with open("sr-te-variables.csv") as csvFile:    #open the file
     GB.add_edge(a2, z2, weight=w2)
 csvFile.close()     #close the file
 
+# read in A-Z Dijkstra path data from csv file
 with open("path-variables.csv") as csvFile:     #open the file
   CSVdata = csv.reader(csvFile, delimiter=',')  #read the data
   for row in CSVdata:                           #loop through each row
@@ -38,7 +39,6 @@ with open("path-variables.csv") as csvFile:     #open the file
       spfa2 = str(row[3])
       spfz2 = str(row[4])
 csvFile.close()     #close the file
-
 
 # A data plane
 # -----------------------------------------------------------------------------
@@ -64,12 +64,11 @@ nx.draw_networkx_edges(GA, posA, edgelist=elarge, width=4, alpha=0.5,
 # edge lables
 nx.draw_networkx_edge_labels(GA, posA, font_size=9, edge_labels={(a1, z1): w1})
 
-
 # edge lables
 #nx.draw_networkx_edge_labels(
 #    GA, posA, font_size=9,
 #    edge_labels={('ja', 'da'): weight})
-
+#nx.draw_networkx_edge_labels(GA, posA, font_size=9, edge_labels={(a1, z1): w1})  # how to add label with weight
 
 # B data plane
 # -----------------------------------------------------------------------------
@@ -93,13 +92,6 @@ nx.draw_networkx_edges(GB, posB, edgelist=esmall, width=2, alpha=0.5,
 nx.draw_networkx_edges(GB, posB, edgelist=elarge, width=4, alpha=0.5,
         edge_color='red', style='solid')
 
-# Dijkstra shortest weighted path between two nodes
-#pathsA = nx.shortest_path(GA, spfa1, spfz1, weight='weight')  # A Plane
-#pathsA_edges = list(zip(pathsA,pathsA[1:]))
-#nx.draw_networkx_edges(GA, posA, edgelist=pathsA_edges, width=3, alpha=0.5, edge_color='black', style='solid')
-#pathsB = nx.shortest_path(GB, spfa2, spfz2, weight='weight')  # B Plane
-#pathsB_edges = list(zip(pathsB,pathsB[1:]))
-#nx.draw_networkx_edges(GB, posB, edgelist=pathsB_edges, width=3, alpha=0.5, edge_color='black', style='solid')
 
 print('preplot')
 
@@ -137,11 +129,12 @@ if args.spf == 'y':
 
 
 #pathsA = nx.all_pairs_dijkstra(GA)
+#print(pathsA)
 #print(nx.path_weight(GA, pathsA, 'weight'))
 #print(lengthsA)
 #print('------------------')
-#lengthsB = dict(nx.all_pairs_dijkstra_path_length(GB))
-#print(lengthsB)
+lengthsB = dict(nx.all_pairs_dijkstra_path_length(GB))
+print(lengthsB)
 
 
 plt.show()
