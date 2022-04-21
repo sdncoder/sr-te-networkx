@@ -6,9 +6,20 @@ import argparse
 # add command line argument parsing
 # --spf y = will show SPF for paths per path spreadsheet
 parser = argparse.ArgumentParser()
-parser.add_argument('--spf', help='y to show dijkstra path')
+parser.add_argument('-d', action='store_true', help='dijkstra spf')
+# parser.add_argument('-f', action='store_true', help='load A to Z path from file')  <--remove file read for path
+parser.add_argument('-p', help='src and dst nodes both planes - j d')
+#parser.add_argument('-d', help='show dijkstra path = y')
 args = parser.parse_args()
-print(args.spf)
+print(args.p)
+# assign -p varibables to spf
+if args.d == True:
+    spfa1 = args.p[0]+"a"
+    spfa2 = args.p[0]+"b"
+    spfz1 = args.p[2]+"a"
+    spfz2 = args.p[2]+"b"
+
+
 
 # 2 data planes A (GA) and B (GB)
 GA = nx.Graph()
@@ -31,14 +42,15 @@ with open("sr-te-variables.csv") as csvFile:    #open the file
 csvFile.close()     #close the file
 
 # read in A-Z Dijkstra path data from csv file
-with open("path-variables.csv") as csvFile:     #open the file
-  CSVdata = csv.reader(csvFile, delimiter=',')  #read the data
-  for row in CSVdata:                           #loop through each row
-      spfa1 = str(row[0])
-      spfz1 = str(row[1])
-      spfa2 = str(row[3])
-      spfz2 = str(row[4])
-csvFile.close()     #close the file
+#if args.f == True:
+#    with open("path-variables.csv") as csvFile:     #open the file
+#      CSVdata = csv.reader(csvFile, delimiter=',')  #read the data
+#      for row in CSVdata:                           #loop through each row
+#        spfa1 = str(row[0])
+#        spfz1 = str(row[1])
+#        spfa2 = str(row[3])
+#        spfz2 = str(row[4])
+#    csvFile.close()     #close the file
 
 # A data plane
 # -----------------------------------------------------------------------------
@@ -96,7 +108,7 @@ nx.draw_networkx_edges(GB, posB, edgelist=elarge, width=4, alpha=0.5,
 print('preplot')
 
 # calculate and graph Dijkstra shortest path for GA
-if args.spf == 'y':
+if args.d == True:
     print('spf if statment')
     pathsA = nx.dijkstra_path(GA, spfa1, spfz1, weight='weight')  # A Plane
     pathsA_edges = list(zip(pathsA,pathsA[1:]))
@@ -110,7 +122,7 @@ if args.spf == 'y':
 #draw_networkx_nodes
 # total cost of path (edge+weight) for GA
 #print(pathsA_edges) # print path pairs for SPF A plane
-
+#print(pathsB_edges)
 
 
 
@@ -133,8 +145,8 @@ if args.spf == 'y':
 #print(nx.path_weight(GA, pathsA, 'weight'))
 #print(lengthsA)
 #print('------------------')
-lengthsB = dict(nx.all_pairs_dijkstra_path_length(GB))
-print(lengthsB)
+#lengthsB = dict(nx.all_pairs_dijkstra(GB))
+#print(lengthsB)
 
 
 plt.show()
