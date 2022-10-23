@@ -56,8 +56,8 @@ csvFile.close()     #close the file
 # -----------------------------------------------------------------------------
 # elarge to show exclude of path by using large SR-TE metric
 # esmall for Dijkstra to destination prefix-SID
-elarge = [(u, v) for (u, v, d) in GA.edges(data=True) if d['weight'] > 100]
-esmall = [(u, v) for (u, v, d) in GA.edges(data=True) if d['weight'] <= 10]
+elarge = [(u, v) for (u, v, d) in GA.edges(data=True) if d['weight'] > 100]  # large edges
+esmall = [(u, v) for (u, v, d) in GA.edges(data=True) if d['weight'] <= 10]  # small edges  
 
 # statically place nodes on graph
 posA={'ja':(0.4,0.8), 'da':(1,1), 'la':(0.4,-0.8), 'ta':(1,0), 'aa':(1,-0.7), 'ha':(1,-1.4), 'ga':(1.6,-0.5), 'ca':(1.4,0.5), 'ra':(2,0.5)}
